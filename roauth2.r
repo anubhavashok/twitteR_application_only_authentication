@@ -1,5 +1,6 @@
 library(RCurl)
 library(rjson)
+
 oauth2_authentication<-function(consKey,consSec){
 cred_b64<-base64Encode(paste(consKey,":",consSec,sep=""))
 curl.opts<-curlOptions(httpheader = c(  Authorization = paste("Basic ",cred_b64,sep=""),
