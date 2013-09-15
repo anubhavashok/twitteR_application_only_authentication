@@ -26,7 +26,7 @@ Procedure
           Search
             |
             V
-  Invalidate token if necessary
+      Invalidate token
 
 A more detailed overview of the functions can be found in the comments of the function files
 
