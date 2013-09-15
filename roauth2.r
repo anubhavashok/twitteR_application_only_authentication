@@ -26,3 +26,22 @@ bearerToken<-fromJSON(postForm(uri="https://api.twitter.com/oauth2/token",
 				style="POST"))	
 return (bearerToken)
 }
+
+#Refresh Token
+
+oauth2_invalidate_token<-function(consKey,consSec){
+#encode consumer key and secret into base64("<consKey>:<consSec>")
+cred_b64<-base64Encode(paste(consKey,":",consSec,sep=""))
+#Set headers in curlOptions
+#Set verbose = TRUE for diagnostic information
+curl.opts<-curlOptions(httpheader = c(  Authorization = paste("Basic ",cred_b64,sep=""),
+				"Content-Type"="application/x-www-form-urlencoded;charset=UTF-8")
+			#verbose = TRUE
+		)
+#Send twitter API a POST request to obtain a bearer token
+bearerToken<-fromJSON(postForm(uri="https://api.twitter.com/oauth2/invaltoken",
+				grant_type="client_credentials",
+				.opts=curl.opts, 
+				style="POST"))	
+return (bearerToken)
+}
